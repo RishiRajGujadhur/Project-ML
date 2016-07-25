@@ -1,0 +1,291 @@
+﻿@{
+    ViewBag.Title = "Statistics";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<link href="~/Content/animate.css" rel="stylesheet" />
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        var maleValue = null;
+        var femaleValue = null;
+        $(document).ready(function () {
+            //Load Data Here
+            var chartData = null;
+            $.ajax({
+                url: '/Details/GenderSurvivalStats',
+
+                type: 'GET',
+                dataType: 'json',
+                data: '',
+                success: function (d) {
+                    chartData = d;
+                    maleValue = Number(chartData[1]);
+                    femaleValue = Number(chartData[2]);
+
+
+                },
+                error: function () {
+                    alert('Error!');
+                }
+            }).done(function () {
+                drawChart(chartData);
+
+            });
+        });
+
+        // Load the Visualization API and the corechart package.
+        //google.charts.load('current', { 'packages': ['corechart'] });
+        google.load('visualization', '1', { packages: ['corechart', 'bar', 'table', ] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart(chartData) {
+
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Gender');
+            data.addColumn('number', 'Survival count');
+            data.addRows([
+              ['Male', maleValue],
+              ['Female', femaleValue]
+
+            ]);
+
+            // Set chart options
+            var options = {
+                'title': 'Suvival per gender count',
+                is3D: true,
+                'width': 1000,
+                'height': 400
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <script>
+
+        var survived = null;
+        var drown = null;
+
+        $(document).ready(function () {
+            //Load Data Here
+            var chartData = null;
+            $.ajax({
+                url: '/Details/SurvivalStats',
+                type: 'GET',
+                dataType: 'json',
+                data: '',
+                success: function (d) {
+                    chartData = d;
+                    survived = Number(chartData[2]);
+                    drown = Number(chartData[1]);
+
+                },
+                error: function () {
+                    alert('Error!');
+                }
+            }).done(function () {
+                drawChartSurvival(chartData);
+
+            });
+        });
+        google.charts.setOnLoadCallback(drawChartSurvival);
+        function drawChartSurvival(chartData) {
+
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Gender');
+            data.addColumn('number', 'Survival count');
+            data.addRows([
+              ['Survived', survived],
+              ['Drown', drown]
+
+            ]);
+
+            // Set chart options
+            var options = {
+                'title': 'Suvival Vs Drown count',
+                pieHole: 0.4,
+                'width': 1000,
+                'height': 400
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div_SurvivalRate'));
+            chart.draw(data, options);
+        }
+
+    </script>
+
+    <script>
+
+    $(document).ready(function () {
+        //Load Data Here
+        var chartData = null;
+        $.ajax({
+            url: '/Details/AgePerEmbarkment',
+            type: 'GET',
+            dataType: 'json',
+            data: '',
+            success: function (d) {
+                chartData = d;
+
+                cAV3 = chartData[1];
+                cAV2 = chartData[3];
+                cAV1 = chartData[2];
+
+                AvgClass3Age = Number(cAV3[0]);
+                AvgClass1Age = Number(cAV1[0]);
+                AvgClass2Age = Number(cAV2[0]);
+
+                MaxClass3Age = Number(cAV3[2]);
+                MaxClass1Age = Number(cAV1[2]);
+                MaxClass2Age = Number(cAV2[2]);
+
+                MinClass3Age = Number(cAV3[1]);
+                MinClass1Age = Number(cAV1[1]);
+                MinClass2Age = Number(cAV2[1]);
+
+            },
+            error: function () {
+                alert('Error!');
+            }
+        }).done(function () {
+            drawChart1();
+        });
+    });
+
+    google.charts.setOnLoadCallback(drawChart1);
+    function drawChart1() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Passenger Class', 'Average Age', 'Minimum Age', 'Maximum Age'],
+          ['1st Class', AvgClass1Age, MinClass1Age, MaxClass1Age],
+          ['2nd Class', AvgClass2Age, MinClass2Age, MaxClass2Age],
+          ['3rd Class', AvgClass3Age, MinClass3Age, MaxClass3Age],
+        ]);
+
+        var options = {
+            chart: {
+                title: 'Age per passenger class statistics',
+                subtitle: 'Data of the Titanic passengers',
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, options);
+    }
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("select").change(function () {
+            $(this).find("option:selected").each(function () {
+                if ($(this).attr("value") == "age") {
+                    $(".box").not(".age").hide();
+                    $(".age").show();
+                    
+                }
+                else if ($(this).attr("value") == "gender") {
+                    $(".box").not(".gender").hide();
+                    $(".gender").show();
+                    
+                }
+                else if ($(this).attr("value") == "survival") {
+                    $(".box").not(".survival").hide();
+                    $(".survival").show();
+                   
+                }
+                else {
+                    $(".box").hide();
+                    
+                }
+            });
+        }).change();
+    });
+
+    var wow = new WOW(
+  {
+      boxClass: 'wow',      // animated element css class (default is wow)
+      animateClass: 'animated', // animation css class (default is animated)
+      offset: 0,          // distance to the element when triggering the animation (default is 0)
+      mobile: true,       // trigger animations on mobile devices (default is true)
+      live: true,       // act on asynchronously loaded content (default is true)
+      callback: function (box) {
+          // the callback is fired every time an animation is started
+          // the argument that is passed in is the DOM node being animated
+      },
+      scrollContainer: null // optional scroll container selector, otherwise use window
+  }
+);
+    wow.init();
+</script>
+
+
+}
+
+<style type="text/css">
+    .box {
+      
+    }
+
+    .age {
+            
+    }
+
+    .gender {    
+  }
+
+    .survival {    }
+</style>
+
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 420px;
+  height: 420px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+
+<br />
+<h2>Statistics</h2>
+ 
+<div style="padding-left:75%;padding-bottom:15px">
+    <select class="form-control" style=" z-index:1000; position:absolute; ">
+        <option value="age">Age/Pclass</option>
+        <option value="gender">Survival/Gender</option>
+        <option value="survival">Survival State</option>
+    </select>
+    </div>
+
+<div id="columnchart_material" class="age box fadeIn animated bounceIn" style="width: 900px; height: 500px;">
+    <div class="loader"></div>
+</div>
+<div id="chart_div" class="gender box animated bounceIn"></div>
+<div id="chart_div_SurvivalRate" class="survival box animated bounceIn"></div>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-WebApplication3-20160719101816.mdf;Initial Catalog=aspnet-WebApplication3-20160719101816;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\GUJADHUR\\Desktop\\WebApplication3\\WebApplication3\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="AzureDBEntities-Web.config Connection String" description="AzureDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/myModel.csdl|res://*/myModel.ssdl|res://*/myModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:rchannelr2.database.windows.net;initial catalog=UserDB;user id=rishiraj;password=djCool0026;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\GUJADHUR\\Desktop\\WebApplication3\\WebApplication3\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AzureDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

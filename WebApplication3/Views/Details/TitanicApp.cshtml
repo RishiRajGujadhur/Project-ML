@@ -1,0 +1,39 @@
+﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@{
+    ViewBag.Title = "TitanicApp";
+}
+<br />
+<h3>Titanic App</h3>
+<h4>The app that predicts your survival on the Titanic ship</h4>
+<hr />
+<p><h5>About this smart adaptive application:</h5></p>
+<p>
+    Being in accordance with the Project ML's goal, this smart adaptive application demonstrates the automation of predictive data analysis using the two-class decision forest algorithm. This app allows you to determine your survival on the Titanic ship by comparing your attributes with the ones of the real passengers of the Titanic ship.
+</p>
+<br />
+
+<p><h5>The two-class decision forest algorithm:</h5></p>
+To understand the two-class decision forest algorithm, it is nessary for you to understand the following topics:
+<br/><br />
+
+<p><h5>Decision trees</h5></p>
+<p>Decision tree learning is one of the predictive modelling approaches used in statistics, data mining and machine learning.</p>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/-dCtJjlEEgM?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+<p>
+
+<p><h5>Understanding Decision Forests</h5></p>
+<p>
+    <blockquote>
+<p>
+    The decision forest algorithm works by building multiple decision trees and then voting on the most popular output class. Voting is a form of aggregation, in which each tree in a classification decision forest outputs a non-normalized frequency histogram of labels. The aggregation process sums these histograms and normalizes the result to get the “probabilities” for each label. The trees that have high prediction confidence will have a greater weight in the final decision of the ensemble.
+ <a href="https://www.microsoft.com/en-us/research/project/decision-forests/">Read More </a>
+</p>
+
+<footer>From Microsoft's website</footer>
+  </blockquote>
+</p>
+
+<p><h5>The two-class decision forest algorithm explained:</h5></p>
+The algorithm is based on the random decision forests algorithm, moreover this algorithm can be used to predict a target that has two values. For example, the Titanic app provide a prediction by selecting between two numeric values: 1 and 0, 1 being survived and 0 being drown, the prediction is obtain by applying a series of random decision forests algorithms to the test data for the most accurate results.    
+<br/>
+<br />

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApplication3.Titanic>
+
+@{
+    ViewBag.Title = "Dataset";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.material.min.css">
+
+
+<script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.material.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //Call EmpDetails jsonResult Method
+        $.getJSON("/Details/Index1",
+        function (json) {
+            var tr;
+
+            //Append each row to html table
+            for (var i = 0; i < json.length; i++) {
+                tr = $('<tr/>');
+
+                tr.append("<td>" + json[i].Survived + "</td>");
+                tr.append("<td>" + json[i].Passenger_class + "</td>");
+                tr.append("<td>" + json[i].Gender + "</td>");
+                tr.append("<td>" + json[i].Age + "</td>");
+                tr.append("<td>" + json[i].Embarkment + "</td>");
+
+                $('table').append(tr);
+
+            }
+            $('#EmpInfo').DataTable({
+                columnDefs: [
+                    {
+                        targets: [0, 1, 2],
+                        className: 'mdl-data-table__cell--non-numeric'
+                    }
+                ]
+            });
+        });
+
+    });
+</script>
+@section Scripts{}
+<br/>
+<h3>Dataset Used</h3>
+ 
+
+<div class="form-horizontal">
+    <table id="EmpInfo" class="mdl-data-table" cellspacing="0" width="100%"  table-hover>
+        <thead>
+            <tr border="0">
+                <th>Survived</th>
+                <th>Passenger_class</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Embarkment</th>
+            </tr>
+        </thead>
+
+        <tbody></tbody>
+    </table>
+
+</div>
+

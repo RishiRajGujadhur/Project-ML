@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Azure ML Experiment</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+  
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+  
+    <link href="~/Content/animate.css" rel="stylesheet" />
+</head>
+<body class="wow fadeIn">
+    <!-- Modal -->
+    <div class="modal fade" id="myModalGS" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Getting Started</h5>
+                </div>
+                <div class="modal-body">
+                        <li>
+                            Go to the home webpage
+                        </li>
+                        <li>
+                            Analyse the instruction section below for the field meanings.
+                        </li>
+                        <li>
+                            Fill the text boxes with your details, Submit the form
+                        </li>
+                        <li>
+                            A Json result would be displayed
+                        </li>
+                        <li>
+                            if Values section: "Values\":[[\"1\",\"0.625\"]]}}}}" returns a 1 then you would have survived the Titanic, else you would have drown. The value next to 1 in this case 0.625; is the probability of your survival.
+                        </li>
+                    <hr />
+                    <h5>
+                        Instructions
+                    </h5>
+                     
+                    <div class="table-responsive">
+                        <table class="table" id="mytable">
+                            <thead>
+                                <tr>
+                                    <th>survival :</th>
+                                    <td>Survival (0 = No; 1 = Yes)</td>
+                                </tr>
+                                <tr>
+                                    <th>pclass :</th>
+                                    <td>Passenger Class (1 = 1st; 2 = 2nd; 3 = 3rd)</td>
+                                </tr>
+                                <tr>
+                                    <th>gender :</th>
+                                    <td>gender = Male, Female</td>
+                                </tr>
+                            <th>age :</th>
+                            <td>Age</td>
+                            <tr>
+                                <th>embarked :</th>
+                                <td>Port of Embarkation (C = Cherbourg; Q = Queenstown; S = Southampton)</td>
+                            </tr>
+                            </thead>
+                            <tbody>    </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Project ML - Titanic", "Save", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" style="float:right">
+                    <li style="text-transform:uppercase">@Html.ActionLink("Home", "Save", "Home")</li>
+                    <li style="text-transform:uppercase">@Html.ActionLink("Project ML", "ProjectML", "Details")</li>
+                    <li style="text-transform:uppercase">@Html.ActionLink("Titanic", "TitanicApp", "Details")</li>
+                    <li style="text-transform:uppercase">@Html.ActionLink("Test data", "Index", "Details")</li>
+                    <li style="text-transform:uppercase">@Html.ActionLink("Statistics", "Statistics", "Details")</li>
+                    <li style="text-transform:uppercase"><a href="#myModal" data-toggle="modal" data-target="#myModalGS">Getting Started</a></li>
+                  
+                   
+                </ul>
+              
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+         
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Project ML <span style="float: right">Engineered by <a href="mailto:r.r.gujadhur@gmail.com">Rishi Raj Gujadhur.</a></span></p>
+        </footer>
+    </div>
+   
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+</body>
+</html>
